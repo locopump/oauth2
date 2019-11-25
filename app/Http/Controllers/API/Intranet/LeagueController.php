@@ -25,7 +25,8 @@ class LeagueController extends Controller
 
     public function pruebaLista()
     {
-        $data = $this->teamService->updateteams();
+//        $data = $this->teamService->updateteams();
+        $data = $this->compService->updateCompetitions();
 
         dd($data);
 

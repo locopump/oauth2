@@ -13,6 +13,20 @@ class UserController extends Controller
 {
     public $successStatus = 200;
 
+    public function login(Request $request)
+    {
+        $loginData = $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
+
+        if(!auth()->attempt($loginData)) {
+            return response(['message'=>'Invalid credentials']);
+        }
+        $accessToken = auth()->user()->createToken('Oauth2')->accessToken;
+        return response(['user' => auth()->user(), 'access_token' => $accessToken]);
+    }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [

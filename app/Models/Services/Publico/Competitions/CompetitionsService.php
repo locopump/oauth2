@@ -117,9 +117,9 @@ Class CompetitionsService
 
         try {
             $competition = $this->comp_repo->getRow($id);
-            $dataCompetition = str_replace("\'","'",json_encode($competition, JSON_UNESCAPED_SLASHES));
 
             if ($competition) {
+                $dataCompetition = json_encode((string) $competition, true);
                 $code = 200;
                 $response = [
                     'success' => true,
@@ -177,7 +177,6 @@ Class CompetitionsService
     {
         $response['status'] = 0;
         $response['message'] = '';
-        $response['count'] = 0;
         $response['records'] = [];
 
         try {
@@ -220,7 +219,6 @@ Class CompetitionsService
             $competitionsRun = $this->run($pathCompetitions);
             $competitions = $competitionsRun;
             $filter_comp = ['id' => [2000,2001,2002,2003,2013,2014,2015,2016,2017,2018,2019,2021]];
-
             foreach ($competitions->competitions as $comp)
             {
                 $comp_data = array(
@@ -315,20 +313,20 @@ Class CompetitionsService
                     $insertCompetition = $this->comp_repo->register($comp_data);
                     if (empty($insertCompetition)) {
                         throw new CustomException('No se registro la competencia ' .
-                            $comp->id);
+                            (int) $comp->id);
                     }
                 } else {
-                    $updateCompetition = $this->comp_repo->update($comp_data, $comp->id);
+                    $updateCompetition = $this->comp_repo->update($comp_data, (int) $comp->id);
                     if ($updateCompetition <= 0 || empty($updateCompetition) ) {
                         throw new  CustomException('Ocurrió un error al actualizar la competencia ' .
-                            $comp->id . ' - comp_data => ' . json_encode($comp_data));
+                            (int) $comp->id . ' - comp_data => ' . json_encode($comp_data));
                     }
                 }
             }
 
+
             $response['message'] = 'Datos actualizados';
             $response['status'] = 1;
-            $response['count'] = $competitions->count;
             $response['records'] = $competitions;
         } catch (QueryException $e) {
             $response['message'] = '¡ERROR! contact with support.';

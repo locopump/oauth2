@@ -65,7 +65,7 @@ server {
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## Endpoints y uso en postman
+## Crontab, Endpoints y uso en postman
 
 Los comandos a ejecutar en el crontab son:
 
@@ -73,6 +73,11 @@ Los comandos a ejecutar en el crontab son:
 -  php artisan football:teams (aun por hacer, api restricted for payment)
 -  php artisan football:players (aun por hacer, api restricted for payment)
 
+Los endpoints disponibles son:
+- register
+- login
+- competitions
+- competitions/id
 
 ## Configuración crontab
 ```

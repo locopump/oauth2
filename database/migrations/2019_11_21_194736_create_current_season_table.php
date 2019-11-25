@@ -16,8 +16,8 @@ class CreateCurrentSeasonTable extends Migration
         Schema::create('current_season', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('startDate', 10);
-            $table->string('endDate', 10);
-            $table->integer('currentMatchday')->unsigned();
+            $table->string('endDate', 10)->nullable();
+            $table->integer('currentMatchday')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

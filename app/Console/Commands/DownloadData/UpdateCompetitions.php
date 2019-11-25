@@ -48,20 +48,18 @@ class UpdateCompetitions extends Command
     public function handle()
     {
         try {
-            //
-
+            $message = 'con problemas.';
             $this->line("DESCARGA DE INFORMACION DE COMPETICIONES DE FOOTBALL");
             $this->line("====================================================");
 
 
             $competitions = $this->cptService->updateCompetitions();
-//            dd($competitions);
-//
-//            if (!$competitions['status']) {
-//                throw new Exception($cobranzaLista['error']);
-//            }
 
-            $this->info('Carga de información a bd local: ' . '$variable');
+            if ($competitions['status'] == 1 ) {
+                $message = 'Correcta';
+            }
+
+            $this->info('Carga de información a bd local: ' . $message);
         } catch (Exception $e) {
             $this->error($e->getMessage());
         }

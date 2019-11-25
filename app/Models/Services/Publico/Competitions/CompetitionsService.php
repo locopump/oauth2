@@ -42,13 +42,14 @@ Class CompetitionsService
         $res = $this->client->request($type, $uri);
         return json_decode( $res->getBody() );
     }
+
     public function updateCompetitions()
     {
         $response['status'] = 0;
         $response['message'] = '';
         $response['count'] = 0;
         $response['records'] = [];
-        $code = 400;
+//        $code = 400;
 
         try {
             $pathApi = env('FOOTBALL.API') . '/' . env('FOOTBALL.VERSION') . '/';
@@ -87,7 +88,8 @@ Class CompetitionsService
 
             # Competitions, Current Season and Winner Season
             $pathCompetitions = $pathApi . $epCompetitions;
-            $competitions = $this->run($pathCompetitions);
+            $competitionsRun = $this->run($pathCompetitions);
+            $competitions = $competitionsRun;
             $filter_comp = ['id' => [2000,2001,2002,2003,2013,2014,2015,2016,2017,2018,2019,2021]];
 
             foreach ($competitions->competitions as $comp)
@@ -165,11 +167,24 @@ Class CompetitionsService
 
                 # competitions
                 $existCompetition = $this->comp_repo->getRow( (int) $comp->id );
+                $existCompArea = $this->service_area->getRow( (int) $comp->area->id );
 
-                if ( !empty($existCompetition) )
+                if ($existCompArea['status'] == 0)
                 {
-                    $insertCompetition = $this->comp_repo->insert($comp_data);
-                    if (!empty($insertCompetition) && $insertCompetition != 0) {
+                    $dataArea = array(
+                        'id' => $comp->area->id,
+                        'name' => $comp->area->name
+                    );
+                    $insertCompArea = $this->service_area->insert($dataArea);
+                    if ($insertCompArea['status'] == 0) {
+                        throw new CustomException('No se registro el area de competición ' . $comp->area->id);
+                    }
+                }
+
+                if ( empty($existCompetition) || $existCompetition == null || !isset($existCompetition) )
+                {
+                    $insertCompetition = $this->comp_repo->register($comp_data);
+                    if (empty($insertCompetition)) {
                         throw new CustomException('No se registro la competencia ' .
                             $comp->id);
                     }
@@ -177,17 +192,15 @@ Class CompetitionsService
                     $updateCompetition = $this->comp_repo->update($comp_data, $comp->id);
                     if ($updateCompetition <= 0 || empty($updateCompetition) ) {
                         throw new  CustomException('Ocurrió un error al actualizar la competencia ' .
-                            $comp->id);
+                            $comp->id . ' - comp_data => ' . json_encode($comp_data));
                     }
                 }
-                dd($comp_data);
             }
 
-            $code = 202;
             $response['message'] = 'Datos actualizados';
             $response['status'] = 1;
             $response['count'] = $competitions->count;
-//            $response['records'] = collect($leagues->competitions)->toJson(JSON_PRETTY_PRINT);
+            $response['records'] = $competitions;
         } catch (QueryException $e) {
             $response['message'] = '¡ERROR! contact with support.';
             Log::critical('Update Competitions',
@@ -198,6 +211,7 @@ Class CompetitionsService
                 ['request' => [], 'exception' => $e->getMessage()]);
         }
 
-        return response()->json($response['records'], $code);
+//        return response()->json($response['records'], $code);
+        return $response;
     }
 }

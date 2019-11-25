@@ -16,7 +16,7 @@ class CreateAreaTable extends Migration
         Schema::create('area', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name',100);
-            $table->char('countryCode',3);
+            $table->char('countryCode',3)->nullable();
             $table->longText('ensignUrl')->nullable();
             $table->bigInteger('parentAreaId')->unsigned()->nullable();
             $table->string('parentArea', 100)->nullable();

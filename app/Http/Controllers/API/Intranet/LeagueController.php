@@ -4,21 +4,21 @@ namespace App\Http\Controllers\API\Intranet;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Services\Publico\Competitions\CompetitionsService;
+use App\Models\Services\Publico\Team\TeamService;
 
 class LeagueController extends Controller
 {
 
-    protected $cptService;
+    protected $teamService;
 
-    public function __construct(CompetitionsService $cptService)
+    public function __construct(TeamService $teamService)
     {
-        $this->cptService = $cptService;
+        $this->teamService = $teamService;
     }
 
     public function pruebaLista()
     {
-        $data = $this->cptService->updateCompetitions();
+        $data = $this->teamService->updateteams();
 
         dd($data);
 

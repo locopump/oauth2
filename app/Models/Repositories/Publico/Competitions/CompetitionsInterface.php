@@ -22,4 +22,9 @@ interface CompetitionsInterface
      * @return mixed
      */
     public function getRow(int $id);
+
+    /**
+     * @return mixed
+     */
+    public function getAll();
 }

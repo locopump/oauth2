@@ -43,13 +43,142 @@ Class CompetitionsService
         return json_decode( $res->getBody() );
     }
 
+    public function getAllCompetitions()
+    {
+        $response['status'] = 0;
+        $response['message'] = '';
+        $response['records'] = [];
+        $code = 400;
+
+        try {
+            $competitions = $this->comp_repo->getAll();
+            $dataCompetitions = str_replace("\'","'",json_encode($competitions, JSON_UNESCAPED_SLASHES));
+
+            if ($competitions) {
+                $code = 200;
+                $response = [
+                    'success' => true,
+                    'data' => $dataCompetitions,
+                    'message' => 'Datos obtenidos correctamente.',
+                    'code' => $code
+                ];
+
+            } else {
+                $code = 202;
+                $response = [
+                    'success' => false,
+                    'error' =>
+                        [
+                            'type' => 'Query',
+                            'description' => null
+                        ],
+                    'message' => 'Ocurrió un error.',
+                    'code' => $code
+                ];
+            }
+
+        } catch (QueryException $e) {
+            $response = [
+                'success' => false,
+                'error' =>
+                    [
+                        'type' => 'Query',
+                        'description' => null
+                    ],
+                'message' => '¡ERROR! contact with support.',
+                'code' => $code
+            ];
+            Log::critical('Get All Competitions',
+                ['request' => $response, 'exception' => $e->getMessage()]);
+        } catch (Exception $e) {
+            $response = [
+                'success' => false,
+                'error' =>
+                    [
+                        'type' => 'Query',
+                        'description' => null
+                    ],
+                'message' => '¡ERROR! contact with support.',
+                'code' => $code
+            ];
+            Log::alert('Get All Competitions',
+                ['request' => $response, 'exception' => $e->getMessage()]);
+        }
+
+        return response()->json($response, $code);
+    }
+
+    public function getCompetition(int $id)
+    {
+        $response['status'] = 0;
+        $response['message'] = '';
+        $response['records'] = [];
+        $code = 400;
+
+        try {
+            $competition = $this->comp_repo->getRow($id);
+            $dataCompetition = str_replace("\'","'",json_encode($competition, JSON_UNESCAPED_SLASHES));
+
+            if ($competition) {
+                $code = 200;
+                $response = [
+                    'success' => true,
+                    'data' => $dataCompetition,
+                    'message' => 'Datos obtenidos correctamente.',
+                    'code' => $code
+                ];
+
+            } else {
+                $code = 202;
+                $response = [
+                    'success' => false,
+                    'error' =>
+                        [
+                            'type' => 'Query',
+                            'description' => null
+                        ],
+                    'message' => 'Ocurrió un error.',
+                    'code' => $code
+                ];
+            }
+
+        } catch (QueryException $e) {
+            $response = [
+                'success' => false,
+                'error' =>
+                    [
+                        'type' => 'Query',
+                        'description' => null
+                    ],
+                'message' => '¡ERROR! contact with support.',
+                'code' => $code
+            ];
+            Log::critical('Get All Competitions',
+                ['request' => $response, 'exception' => $e->getMessage()]);
+        } catch (Exception $e) {
+            $response = [
+                'success' => false,
+                'error' =>
+                    [
+                        'type' => 'Query',
+                        'description' => null
+                    ],
+                'message' => '¡ERROR! contact with support.',
+                'code' => $code
+            ];
+            Log::alert('Get All Competitions',
+                ['request' => $response, 'exception' => $e->getMessage()]);
+        }
+
+        return response()->json($response, $code);
+    }
+
     public function updateCompetitions()
     {
         $response['status'] = 0;
         $response['message'] = '';
         $response['count'] = 0;
         $response['records'] = [];
-//        $code = 400;
 
         try {
             $pathApi = env('FOOTBALL.API') . '/' . env('FOOTBALL.VERSION') . '/';
@@ -211,7 +340,6 @@ Class CompetitionsService
                 ['request' => [], 'exception' => $e->getMessage()]);
         }
 
-//        return response()->json($response['records'], $code);
         return $response;
     }
 }

@@ -22,9 +22,9 @@ class CreateWinnerSeasonTable extends Migration
                 ->on('current_season')
                 ->onDelete('cascade');
             $table->string('name', 100);
-            $table->string('shortName', 50);
-            $table->char('tla', 3);
-            $table->longText('crestUrl');
+            $table->string('shortName', 50)->nullable();
+            $table->char('tla', 3)->nullable();
+            $table->longText('crestUrl')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

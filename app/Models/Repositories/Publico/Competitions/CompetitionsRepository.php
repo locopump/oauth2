@@ -30,4 +30,12 @@ class CompetitionsRepository implements CompetitionsInterface
         return $data;
     }
 
+    public function getAll()
+    {
+        $data = DB::table('competitions')
+            ->get();
+
+        return $data;
+    }
+
 }

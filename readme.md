@@ -70,8 +70,18 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 Los comandos a ejecutar en el crontab son:
 
 -  php artisan football:competitions
--  php artisan football:teams (aun por hacer)
--  php artisan football:players (aun por hacer)
+-  php artisan football:teams (aun por hacer, api restricted for payment)
+-  php artisan football:players (aun por hacer, api restricted for payment)
+
+
+## Configuración crontab
+```
+crontab -e
+Escribir:
+* * * * * [project-path]/php artisan football:competitions
+Guardar y salir 
+
+```
 
 ## Datos de contacto
 

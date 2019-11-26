@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "18b2bc8f-147e-43bd-94ab-082db96a77e0",
+		"name": "APIPLAYERS",
+		"description": "Api to consume a service rest from external api and then create a report about the consumed information before.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "locopump",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "augusto.caceres.puma@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Hola1234",
+							"type": "text"
+						},
+						{
+							"key": "c_password",
+							"value": "Hola1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://apiplayers.local/api/register",
+					"protocol": "http",
+					"host": [
+						"apiplayers",
+						"local"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "details",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMGE4ZDUxODA0YTEwMDdmNzU0M2ZlNmRmOWZkYTNjOGZhMTgxYjkyMGQzYTM0MDQ0NGViZGNkMDE1NmI3ZThmYmEwZjY1MzdmNDBhYjg0NTQiLCJpYXQiOjE1NzQ3MTM1OTYsIm5iZiI6MTU3NDcxMzU5NiwiZXhwIjoxNTkwNDM4Mzk2LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.H2KZx5z9_QdtiD3Z80y_5AOLRx7EmcK0dZ6o7MWMOBIe18L0sHp0GcI151f-IlqXi4Vlk3bKYtsh4DeRlujLK10KKwzv-DBfFUBPGbmXC5fWjx41aHjzTC60ilMUJqTtBIkqevIdnWZlwPlPix-E3YVXK9WCnN_p8t27xzjTv56kY_pIWFn8BfaXfD9M1MVUGAq1VuKPa83GbpVT1xYGhvZiq1Fk0K-5NmPtCnRQqwY0kFSlkHEDp2euS_6RlgSdKjDG84BCo_JlYc4jdz8tuaHpjsmcFmD7nJDya5JDO5jB8DBbQCJDsTwO7XHvsLjQiAS1-j11E2A16KhEMA7b5ruUtbyARyTSLwH-CHbjez8CE9vzOUHCPFJ23LwgIJnBB3VR--b4iWeKUOL-yUHhSCc-ueNhzc9W5S16wzbFaub8zRmsXDItDt6DIOgo5_2zaGuIeMZ54nVnwYYNaRiMcHs4dllRxQvAyqfGSVdXSowKgCi52lmSRJhuT0YBrcNKnOPaqhFEaCkR1w1YNjzsdiY0l_bV2-2lYqcx7JaZj6KD5O17hu1Ma2lOBWyIqqUjJn39dXzUSpB2Tsxw1dEeDNCsN6p5d4ooKJkfy_l-HodjgRuwD0LbbQXXAi__MwbuqSutOXcZdok8fxT8JvynK8gbR7hhnRFDHFl5fBgiLpc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://apiplayers.local/api/details",
+					"protocol": "http",
+					"host": [
+						"apiplayers",
+						"local"
+					],
+					"path": [
+						"api",
+						"details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "augusto.caceres.puma@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Hola1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://apiplayers.local/api/login",
+					"protocol": "http",
+					"host": [
+						"apiplayers",
+						"local"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "competitions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTQ2N2FlZDEzNmM5YjA0NDUyMWEzZjViMjRhODRiNjliNjAxODQyNmRlYzJiYzNiOTExZmNjMDg0NjJhOTRlM2JiYTc4MTA0N2I2YTk0ZmIiLCJpYXQiOjE1NzQ3MzYyNzAsIm5iZiI6MTU3NDczNjI3MCwiZXhwIjoxNTkwNDYxMDcwLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.A8aS0Hehms7wIsFhQdPWXJkjuxNnwKSEhN2UDo2-K0sniNFMqlNkNy5o5fwC7iiCoXzmnWzLe3YhiE8SsjNYfa6i3K7BeNzLAzmayZP_dOcvmOinTYp8s_UZyxUoptrWeCAuRyPh0Oe1ccBzktlhBp2pVoXdBx0Bs85N13cMxxFN5XWBvrNgQeKKkOIpkFN4_iCVR-t91sTeBDT4C8Pi_UO9BZiRr8HDi_foOFjK2bUo_Cbr252oU8ePVwc1wwT4vBmNlVX5z73IIOrkdcxyxzkHjpMsHTS94ZID1MKOjKqbR7osvqvTOZB0xny5Qel07VjOS1pTAL_ANrufoequ5NOO2Epf1KC8X3FEB7p1ms_Us6TEu4WWQU_OmP0khwZeoIBukiuxLvTfL83wrr6ooM2SwwPrXlvWpO9C92O1de_9qILTmbMTGDvWex9ygBATjY6kOQowl2FZoNrA6rmsQ9371AtHrtE5wND-g9lQt4adV6E3fOm4jv66yblsVgttavtt-7Ki_SkQBDtrvaNrIHn_0g6XitGvJ2g2bxi5y088G0uSKcUbtcLdElJV-GyNWcrrfIpjWJTPawBsQqfXfIQebOOq_ZLXSyzSWkL-XjRCYmoTiXDB6ISpzTajekPQTn8q45VOnZPSdQYAN-q-W8S98efnhQPCgqH6N7Cu-vs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://apiplayers.local/api/competitions",
+					"protocol": "http",
+					"host": [
+						"apiplayers",
+						"local"
+					],
+					"path": [
+						"api",
+						"competitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://apiplayers.local/api/competitions/2006",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTQ2N2FlZDEzNmM5YjA0NDUyMWEzZjViMjRhODRiNjliNjAxODQyNmRlYzJiYzNiOTExZmNjMDg0NjJhOTRlM2JiYTc4MTA0N2I2YTk0ZmIiLCJpYXQiOjE1NzQ3MzYyNzAsIm5iZiI6MTU3NDczNjI3MCwiZXhwIjoxNTkwNDYxMDcwLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.A8aS0Hehms7wIsFhQdPWXJkjuxNnwKSEhN2UDo2-K0sniNFMqlNkNy5o5fwC7iiCoXzmnWzLe3YhiE8SsjNYfa6i3K7BeNzLAzmayZP_dOcvmOinTYp8s_UZyxUoptrWeCAuRyPh0Oe1ccBzktlhBp2pVoXdBx0Bs85N13cMxxFN5XWBvrNgQeKKkOIpkFN4_iCVR-t91sTeBDT4C8Pi_UO9BZiRr8HDi_foOFjK2bUo_Cbr252oU8ePVwc1wwT4vBmNlVX5z73IIOrkdcxyxzkHjpMsHTS94ZID1MKOjKqbR7osvqvTOZB0xny5Qel07VjOS1pTAL_ANrufoequ5NOO2Epf1KC8X3FEB7p1ms_Us6TEu4WWQU_OmP0khwZeoIBukiuxLvTfL83wrr6ooM2SwwPrXlvWpO9C92O1de_9qILTmbMTGDvWex9ygBATjY6kOQowl2FZoNrA6rmsQ9371AtHrtE5wND-g9lQt4adV6E3fOm4jv66yblsVgttavtt-7Ki_SkQBDtrvaNrIHn_0g6XitGvJ2g2bxi5y088G0uSKcUbtcLdElJV-GyNWcrrfIpjWJTPawBsQqfXfIQebOOq_ZLXSyzSWkL-XjRCYmoTiXDB6ISpzTajekPQTn8q45VOnZPSdQYAN-q-W8S98efnhQPCgqH6N7Cu-vs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://apiplayers.local/api/competitions/2006",
+					"protocol": "http",
+					"host": [
+						"apiplayers",
+						"local"
+					],
+					"path": [
+						"api",
+						"competitions",
+						"2006"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -22,10 +22,11 @@ class CreateCompetitionsTable extends Migration
                 ->on('area')
                 ->onDelete('cascade');
             $table->string('name', 100);
-            $table->char('code', 3)->nullable();
+            $table->string('code', 5)->nullable();
             $table->longText('emblemUrl')->nullable();
             $table->string('plan', 50)->nullable();
             $table->bigInteger('curseason_id')
+                ->nullable()
                 ->foreign('curseason_id')
                 ->references('id')
                 ->on('current_season')

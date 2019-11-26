@@ -117,9 +117,9 @@ Class CompetitionsService
 
         try {
             $competition = $this->comp_repo->getRow($id);
+            $dataCompetition = str_replace("\'","'",json_encode($competition, JSON_UNESCAPED_SLASHES));
 
-            if ($competition) {
-                $dataCompetition = json_encode((string) $competition, true);
+            if ( !empty($competition) ) {
                 $code = 200;
                 $response = [
                     'success' => true,
@@ -219,22 +219,13 @@ Class CompetitionsService
             $competitionsRun = $this->run($pathCompetitions);
             $competitions = $competitionsRun;
             $filter_comp = ['id' => [2000,2001,2002,2003,2013,2014,2015,2016,2017,2018,2019,2021]];
+
             foreach ($competitions->competitions as $comp)
             {
-                $comp_data = array(
-                    'id' => $comp->id,
-                    'area_id' => $comp->area->id,
-                    'name' => $comp->name,
-                    'code' => $comp->code,
-                    'emblemUrl' => $comp->emblemUrl,
-                    'plan' => $comp->plan,
-                    'curseason_id' => $comp->currentSeason->id,
-                    'numberOfAvailableSeasons' => $comp->numberOfAvailableSeasons,
-                    'lastUpdated' => $comp->lastUpdated,
-                );
+                $curSeason_id = null;
 
                 # Current Season
-                if ( !empty($comp->currentSeason) )
+                if ( !empty($comp->currentSeason) && $comp->currentSeason != null )
                 {
                     $cur_data = array(
                         'id' => $comp->currentSeason->id ,
@@ -243,6 +234,7 @@ Class CompetitionsService
                         'currentMatchday' => $comp->currentSeason->currentMatchday ,
                     );
 
+                    $curSeason_id = $comp->currentSeason->id;
                     $existSeason = $this->service_season->getRow( (int) $comp->currentSeason->id );
 
                     if ($existSeason['status'] == 0)
@@ -262,7 +254,7 @@ Class CompetitionsService
                 }
 
                 # Winner Season
-                if ( !empty($comp->currentSeason->winner) )
+                if ( isset($comp->currentSeason->winner) && !empty($comp->currentSeason->winner) && $comp->currentSeason->winner != null  )
                 {
                     $winner = $comp->currentSeason->winner;
                     $win_data = array(
@@ -295,6 +287,18 @@ Class CompetitionsService
                 # competitions
                 $existCompetition = $this->comp_repo->getRow( (int) $comp->id );
                 $existCompArea = $this->service_area->getRow( (int) $comp->area->id );
+
+                $comp_data = array(
+                    'id' => $comp->id,
+                    'area_id' => $comp->area->id,
+                    'name' => $comp->name,
+                    'code' => $comp->code,
+                    'emblemUrl' => $comp->emblemUrl,
+                    'plan' => $comp->plan,
+                    'curseason_id' => $curSeason_id,
+                    'numberOfAvailableSeasons' => $comp->numberOfAvailableSeasons,
+                    'lastUpdated' => $comp->lastUpdated,
+                );
 
                 if ($existCompArea['status'] == 0)
                 {

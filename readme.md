@@ -10,13 +10,18 @@ Para poder correr la aplicación, necesitas instalar lo siguiente:
     - sudo apt-get install -y nginx
 - composer
     - [Composer](getcomposer.org)
+- postgresql (con docker)
+    - docker run --name cont_psql12 -e POSTGRES_PASSWORD=postgres -d postgres:12
+    - Para ejecutar la consola de postgres ejecutar el siguiente comando:
+        - docker exec -it cont_psql12 psql -h localhost -U postgres
+    
 
 ## Instalación
 
 Una vez descargadas las dependencias, se debe:
 
  - Crear la BD
-    - psql -h localhost -U postgres
+    - psql -h localhost -U postgres || (para docker) docker exec -it cont_psql12 psql -h localhost -U postgres
     - create database apitest;
     - \q
  - Ubicarse en la ruta del proyecto y descargar las dependencias del proyecto mediante composer
@@ -73,11 +78,15 @@ Los comandos a ejecutar en el crontab son:
 -  php artisan football:teams (aun por hacer, api restricted for payment)
 -  php artisan football:players (aun por hacer, api restricted for payment)
 
-Los endpoints disponibles son:
+**Los endpoints disponibles son:**
 - register
 - login
 - competitions
 - competitions/id
+
+Y estos los pueden ver a detalle en la colección postman que adjunto en el proyecto: __APIPLAYERS.postman_collection.json__
+Esta colección pueden importarla a su aplicación postman y confirmar sus valores, incluuído el registro de usuario para que pueda acceder a los endpoints.
+ 
 
 ## Configuración crontab
 ```
